@@ -4,7 +4,7 @@
 
 ### **Visão Geral**
 
-O **ToonCrafter** é uma ferramenta de interpolação generativa voltada para animações, que utiliza técnicas avançadas de aprendizado de máquina, especialmente modelos de difusão. Foi desenvolvido por uma equipe de pesquisadores associados à **[CUHK (Chinese University of Hong Kong)](https://www.cuhk.edu.hk/english/index.html)** e ao **[Tencent AI Lab](https://ailab.tencent.com/ailab/en/index/)** e apresentado como parte do **[SIGGRAPH Asia 2024 (Journal Track)](https://asia.siggraph.org/2024/presentation/?id=papers_156&sess=sess135)**, um importante evento de computação gráfica e técnicas interativas.
+O **ToonCrafter** é uma ferramenta de interpolação<sup>[i](glossary.md#interpolação)</sup> generativa voltada para animações, que utiliza técnicas avançadas de aprendizado de máquina, especialmente modelos de difusão<sup>[i](glossary.md#modelo-de-difusão)</sup>. Foi desenvolvido por uma equipe de pesquisadores associados à **[CUHK (Chinese University of Hong Kong)](https://www.cuhk.edu.hk/english/index.html)** e ao **[Tencent AI Lab](https://ailab.tencent.com/ailab/en/index/)** e apresentado como parte do **[SIGGRAPH Asia 2024 (Journal Track)](https://asia.siggraph.org/2024/presentation/?id=papers_156&sess=sess135)**, um importante evento de computação gráfica e técnicas interativas.
 
 <table class="center">
     <tr style="font-weight: bolder;text-align:center;">
@@ -71,7 +71,7 @@ A ideia era utilizar modelos de geração de vídeo a partir de imagens para cri
 1. **Características das animações**:
    - **Esparsidade temporal**: Quadros são desenhados manualmente, o que pode resultar em grandes diferenças de movimento entre quadros consecutivos se não gasto tempo suficiente na construção das imagens.
    - **Estilo visual distinto**: Contornos bem definidos, cores sólidas e ausência de borrões de movimento, comuns em vídeos reais.
-- Essas características dificultam a aplicação de métodos tradicionais de interpolação baseados em movimento linear.
+- Essas características dificultam a aplicação de métodos tradicionais de interpolação baseados em movimento linear<sup>[i](glossary.md#interpolação-baseados-em-movimento-linear)</sup>.
 
 2. **O problema do "gap de domínio"**:
   - Modelos treinados em vídeos reais podem interpretar de forma incorreta os estilos de animação, gerando conteúdo irrelevante ou inadequado.
@@ -79,11 +79,11 @@ A ideia era utilizar modelos de geração de vídeo a partir de imagens para cri
 
 3. **Limitações das Abordagens Tradicionais**:
    - Presumem movimentos simples e lineares, falhando em capturar fenômenos como **oclusões** (elementos cobrindo outros) e movimentos não-lineares.
-   - Métodos baseados em correspondência de quadros, como fluxo óptico, são pouco eficazes em texturas simples e estruturas exageradas das animações.
+   - Métodos baseados em correspondência de quadros, como fluxo óptico<sup>[i](glossary.md#fluxo-óptico)</sup>, são pouco eficazes em texturas simples e estruturas exageradas das animações, como as expressões faciais.
    - Perdem detalhes em áreas críticas devido à compressão usada nos modelos generativos.
 
 4. **Desafios na Decodificação**:
-  - Os modelos de difusão trabalham em espaços comprimidos (latentes), sacrificando detalhes ao reconstruir imagens.
+  - Os modelos de difusão trabalham em espaços comprimidos (latentes<sup>[i](glossary.md#espaços-latentes)</sup>), sacrificando detalhes ao reconstruir imagens.
     - Isso é crítico em animações, onde as diferenças visuais são mais perceptíveis devido à ausência de borrões de movimento.
 
 ---
@@ -96,7 +96,7 @@ A solução combina pesquisa acadêmica e experiências práticas e industriais,
 #### **1. Toon Rectification Learning** 
 Adapta os modelos de aprendizado treinados em vídeos reais para o domínio das animações.
 
-  - Camadas responsáveis pelo entendimento do contexto visual e geração de conteúdo foram ajustadas especificamente para dados de animações, utilizando um conjunto de dados dedicado com mais de **500 horas de vídeos animados**.
+  - Camadas<sup>[i](glossary.md#camadas)</sup> responsáveis pelo entendimento do contexto visual e geração de conteúdo foram ajustadas especificamente para dados de animações, utilizando um conjunto de dados dedicado com mais de **500 horas de vídeos animados**.
   - Durante o ajuste fino (fine-tuning), **camadas temporais foram congeladas**, preservando o aprendizado de movimentos realistas já obtido em vídeos reais, enquanto as camadas espaciais foram treinadas para adaptar os detalhes visuais ao estilo animado.
 
 #### **2. Decodificador 3D Baseado em Duas Referências**
@@ -115,7 +115,7 @@ Oferece controle interativo, permitindo que os usuários ajustem o movimento ger
   - Torna o modelo mais flexível para aplicações práticas.
 
 #### **Detalhes Técnicos Adicionais**
-- O desenvolvimento utilizou modelos de difusão latente, aproveitando arquiteturas existentes (como a **Stable Diffusion**) e aprimorando-as para tarefas específicas de interpolação.
+- O desenvolvimento utilizou modelos de difusão latente, aproveitando arquiteturas existentes (como a **Stable Diffusion**) e aprimorando-as para tarefas específicas de interpolação e domínio.
 - Ferramentas como **PyTorch** foram empregadas no treinamento e ajuste dos modelos.
 - A equipe lançou os códigos, pesos do modelo pré-treinado e instruções de instalação para a comunidade open source no GitHub, incentivando colaborações e melhorias futuras.
 
@@ -140,7 +140,7 @@ Mais demostrações em: [ToonCrafter - GitHub Projects](https://doubiiu.github.i
 
 - Os vídeos gerados são relativamente curtos (2 segundos, FPS=8).
 - O modelo tem dificuldade em renderizar texto legível.
-- A parte de codificação automática do modelo tem perdas relevantes, resultando em pequenos artefatos e aberrações.
+- A parte de codificação automática do modelo tem perdas relevantes, resultando em pequenos artefatos e falhas de contexto.
 
 ---
 ### **Formas de Uso**
